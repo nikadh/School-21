@@ -1,0 +1,7 @@
+ls
+cd door_management_files
+ls
+cd door_configuration
+ls
+nano door_1.conf
+#i choose nano
