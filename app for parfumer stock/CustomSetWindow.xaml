@@ -1,0 +1,33 @@
+﻿<Window x:Class="PerfumeWarehouseWPF.CustomSetWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Выберите 6 ароматов для набора" Height="600" Width="800"
+        Background="{StaticResource BackgroundBrush}"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Выберите ровно 6 ароматов (пробники по 2 мл, 500 ₽ за шт.)" FontSize="14" FontWeight="Bold" Margin="0,0,0,10"/>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Поиск:" VerticalAlignment="Center" Margin="0,0,5,0"/>
+            <TextBox x:Name="SearchTextBox" Width="200" Height="25" TextChanged="SearchTextBox_TextChanged"/>
+            <TextBlock x:Name="SelectionCountText" Margin="20,0,0,0" FontWeight="Bold" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <ListBox x:Name="ProductsListBox" SelectionMode="Multiple"
+                     ItemTemplate="{StaticResource ProductItemTemplate}"/>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+            <Button Content="Добавить в корзину" Width="140" Height="30" Click="AddToCartButton_Click"/>
+            <Button Content="Отмена" Width="80" Height="30" Margin="10,0,0,0" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

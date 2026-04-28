@@ -1,0 +1,42 @@
+﻿<Window x:Class="PerfumeWarehouseWPF.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Вход в систему" Height="490" Width="470"
+        Background="{StaticResource BackgroundBrush}"
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid Margin="30,30,30,9">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+      
+        <Image x:Name="LogoImage" Height="100" HorizontalAlignment="Center" Grid.Row="0" Margin="0,10"/>
+
+        <TextBlock HorizontalAlignment="Center" Grid.Row="1" FontSize="24" FontWeight="Bold" Margin="0,20"
+                   Foreground="{StaticResource AccentBrush}">
+            Mancera Stock
+        </TextBlock>
+
+        <StackPanel Grid.Row="2" Width="300" HorizontalAlignment="Center">
+            <TextBlock Text="Логин" Margin="0,5"/>
+            <TextBox x:Name="LoginTextBox" Margin="0,0,0,15" Height="30"/>
+
+            <TextBlock Text="Пароль" Margin="0,5"/>
+            <PasswordBox x:Name="PasswordBox" Margin="0,0,0,20" Height="30"/>
+
+            <Button x:Name="LoginButton" Content="Войти" Height="30" Click="LoginButton_Click"
+                    Background="{StaticResource AccentBrush}" Foreground="White" BorderThickness="0"/>
+
+            <TextBlock x:Name="ErrorMessage" Foreground="Red" HorizontalAlignment="Center" Margin="0,10" Visibility="Collapsed"/>
+
+            <TextBlock HorizontalAlignment="Center" Margin="0,20">
+                <Hyperlink Click="RegisterLink_Click" Foreground="{StaticResource AccentBrush}">
+                    Зарегистрировать нового сотрудника
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</Window>

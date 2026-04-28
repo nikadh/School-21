@@ -1,0 +1,90 @@
+﻿<Window x:Class="PerfumeWarehouseWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:PerfumeWarehouseWPF"
+        Title="Склад Mancera" Height="700" Width="1000"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:SelectedToBorderConverter x:Key="SelectedToBorderConverter"/>
+    </Window.Resources>
+  
+    <Grid Background="{StaticResource BackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Меню -->
+        <Menu Grid.Row="0" Background="#FF1E1E1E" Foreground="White">
+            <MenuItem Header="Выход">
+                <MenuItem Header="Выход" Click="LogoutButton_Click"/>
+            </MenuItem>
+            <MenuItem Header="Товары">
+                <MenuItem Header="Добавить" Click="AddProductButton_Click"/>
+                <MenuItem Header="Редактировать" Click="EditProductButton_Click"/>
+                <MenuItem Header="Удалить" Click="DeleteProductButton_Click"/>
+            </MenuItem>
+            <MenuItem Header="Заказы">
+                <MenuItem Header="Создать заказ" Click="CreateOrderButton_Click"/>
+                <MenuItem Header="Список заказов" Click="OrdersButton_Click"/>
+            </MenuItem>
+         
+            <MenuItem x:Name="RoleMenuItem" IsEnabled="False" HorizontalAlignment="Right" Margin="0,0,10,0"
+                      Foreground="{StaticResource AccentBrush}">
+                <MenuItem.Header>
+                    <TextBlock Text="{Binding RoleDisplay, RelativeSource={RelativeSource AncestorType=Window}}" 
+                               Foreground="{StaticResource AccentBrush}"/>
+                </MenuItem.Header>
+            </MenuItem>
+        </Menu>
+
+        <!-- Панель поиска и фильтров -->
+        <Border Grid.Row="1" Background="#FF1E1E1E" Padding="10">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Поиск по названию:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox x:Name="SearchTextBox" Width="200" Height="25" VerticalAlignment="Center"/>
+                <Button Content="Найти" Width="60" Margin="10,0,0,0" Click="SearchButton_Click"/>
+                <Button Content="Сбросить" Width="70" Margin="5,0,0,0" Click="ResetSearchButton_Click"/>
+                <Button Content="Фильтры" Width="80" Margin="20,0,0,0" Click="FilterButton_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Карточки товаров -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" Background="{StaticResource BackgroundBrush}">
+            <ItemsControl x:Name="ProductsItemsControl">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" Margin="10"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border x:Name="ProductBorder" Width="240" Margin="8" Padding="10"
+                                BorderBrush="{Binding IsSelected, Converter={StaticResource SelectedToBorderConverter}}" 
+                                BorderThickness="2" CornerRadius="8" Background="#FF1E1E1E"
+                                MouseLeftButtonDown="ProductBorder_MouseLeftButtonDown">
+                            <StackPanel>
+                                <Image Source="{Binding ImageSource}" Height="160" Width="160" Stretch="Uniform" Margin="0,5"/>
+                                <TextBlock Text="{Binding ProductName}" FontWeight="Bold" FontSize="14" TextWrapping="Wrap" 
+                                           HorizontalAlignment="Center" Margin="0,5" TextAlignment="Center" Foreground="White"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,5">
+                                    <RadioButton Content="60 мл" IsChecked="{Binding IsVolume60Selected}" 
+                                                 GroupName="{Binding VolumeGroupName}" Margin="5,0" Foreground="White"/>
+                                    <RadioButton Content="120 мл" IsChecked="{Binding IsVolume120Selected}" 
+                                                 GroupName="{Binding VolumeGroupName}" Margin="5,0" Foreground="White"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding DisplayPrice}" FontSize="16" FontWeight="Bold" 
+                                           Foreground="{StaticResource AccentBrush}" HorizontalAlignment="Center" Margin="0,2"/>
+                                <TextBlock Text="{Binding StockInfo}" FontSize="12" HorizontalAlignment="Center"
+                                           Foreground="{Binding StockColor}" Margin="0,2"/>
+                                <Button Content="Подробнее" Margin="0,5" Padding="8,4" Click="DetailsButton_Click" 
+                                        Tag="{Binding ProductId}"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>

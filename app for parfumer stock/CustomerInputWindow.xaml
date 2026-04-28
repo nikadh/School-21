@@ -1,0 +1,49 @@
+﻿<Window x:Class="PerfumeWarehouseWPF.CustomerInputWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Данные клиента" Height="700" Width="700"
+        Background="{StaticResource BackgroundBrush}"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid Margin="15,15,15,39">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Выберите или введите клиента" FontSize="16" FontWeight="Bold" Margin="0,0,0,15"/>
+
+        <StackPanel Grid.Row="1">
+            <!-- Выбор существующего клиента -->
+            <TextBlock Text="Существующий клиент:" Margin="0,0,0,5"/>
+            <ComboBox x:Name="ExistingCustomerComboBox" DisplayMemberPath="DisplayName" 
+                      SelectedValuePath="CustomerID" Margin="0,0,0,10" Height="30"
+                      SelectionChanged="ExistingCustomerComboBox_SelectionChanged"/>
+
+            <TextBlock Text="Или заполните данные нового:" Margin="0,10,0,5" FontWeight="SemiBold"/>
+
+            <TextBlock Text="Фамилия*" Margin="0,5,0,0"/>
+            <TextBox x:Name="LastNameTextBox" Height="28" Margin="0,0,0,5"/>
+
+            <TextBlock Text="Имя*" Margin="0,5,0,0"/>
+            <TextBox x:Name="FirstNameTextBox" Height="28" Margin="0,0,0,5"/>
+
+            <TextBlock Text="Отчество" Margin="0,5,0,0"/>
+            <TextBox x:Name="MiddleNameTextBox" Height="28" Margin="0,0,0,5"/>
+
+            <TextBlock Text="Телефон*" Margin="0,5,0,0"/>
+            <TextBox x:Name="PhoneTextBox" Height="28" Margin="0,0,0,5"/>
+
+            <TextBlock Text="Email" Margin="0,5,0,0"/>
+            <TextBox x:Name="EmailTextBox" Height="28" Margin="0,0,0,5"/>
+
+            <TextBlock Text="Комментарий к заказу" Margin="0,5,0,0"/>
+            <TextBox x:Name="CommentTextBox" Height="50" TextWrapping="Wrap" AcceptsReturn="True"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button Content="OK" Width="80" Margin="0,0,10,0" Click="OkButton_Click"/>
+            <Button Content="Отмена" Width="80" Click="CancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>
